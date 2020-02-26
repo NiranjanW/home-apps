@@ -1,5 +1,6 @@
 package com.home.restful;
 
+import org.apache.http.HttpConnection;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -14,6 +15,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.Buffer;
 
@@ -47,6 +49,33 @@ public class RestClient {
     }
 
     public static void main(String[] args) {
+
+        BufferedReader reader;
+        StringBuffer responseContent = new StringBuffer();
+        String line;
+
+        try {
+            URL url = new URL("");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+
+            int status = connection.getResponseCode();
+
+            if (status > 299){
+                InputStream in;
+                reader = new BufferedReader(new InputStreamReader(connection.getErrorStream()));
+
+                while ((line = reader.readLine() ) != null {
+                    responseContent.append(line);
+                }
+                reader.close();
+            }else {
+
+                InputStream in;
+                reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 }

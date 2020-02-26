@@ -1,4 +1,6 @@
 rootProject.name = 'home-apps'
 include 'functions'
 include 'streams'
+include 'rest'
+include 'concurrency'
 
